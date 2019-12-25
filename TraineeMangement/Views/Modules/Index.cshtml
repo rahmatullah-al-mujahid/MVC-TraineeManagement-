@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TraineeMangement.Models.Module>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-md-center text-info">Module List</h2>
+
+<div class="text-right" >
+    <p>
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
+    </p>
+</div>
+<table class="table" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ModuleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModuleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ModuleId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ModuleId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ModuleId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="text-right">
+    @Html.PagedListPager(Model as IPagedList, page => Url.Action("Index", new { page }))
+</div>

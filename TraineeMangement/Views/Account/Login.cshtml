@@ -1,0 +1,43 @@
+﻿@model TraineeMangement.ViewModels.LoginModel
+    @{
+        ViewBag.Title = "Login";
+    }
+    <div class="row">
+        <div class="col">
+            <div id="msg"></div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                <table class="table table-borderless" style="width:320px">
+                    <tr>
+                        <th style="width:90px;">Username</th>
+                        <td>
+                            @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td>
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td>
+                            <button class="btn btn-primary">Login</button>
+                        </td>
+                    </tr>
+                </table>
+                @Html.ActionLink("Register", "Register", "Accounts")
+            }
+        </div>
+    </div>
+    @section scripts{
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    }
+
+

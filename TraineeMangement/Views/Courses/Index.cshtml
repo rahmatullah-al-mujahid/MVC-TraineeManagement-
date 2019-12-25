@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TraineeMangement.ViewModels.CourseViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col">
+
+        
+        <div class="d-flex justify-content-end">
+          <a style="position:relative;top:12px;z-index:9999" href="@Url.Action("Create", "Courses")" title="Add new course" class="btn btn-primary rounded-circle"><i class="fa fa-plus"></i></a>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h4>Course List</h4><h4 class="text-right">Running Batches</h4>
+            </li>
+                           
+            @foreach (var c in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>@c.CourseName (@c.ShortName)</span>
+                    <span class="badge badge-dark">@c.RunningBatches</span>
+                </li>
+            }
+        </ul>
+       
+    </div>
+</div>
+
+

@@ -1,0 +1,59 @@
+﻿@model TraineeMangement.Models.Course
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col">
+       <h3>Add new Course</h3>
+        @using (Ajax.BeginForm("Create",  new { }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "onSuccess", OnComplete = "onComplete" }, new { name = "f", id = "f" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">
+                @Html.LabelFor(x => x.CourseName, new { @class = "col-form-label col-2" })
+                <div class="col-10">
+                    @Html.TextBoxFor(x => x.CourseName, new { @class = "form-control col-4" })
+                    @Html.ValidationMessageFor(x => x.CourseName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(x => x.ShortName, new { @class = "col-form-label col-2" })
+                <div class="col-10">
+                    @Html.TextBoxFor(x => x.ShortName, new { @class = "form-control col-4" })
+                    @Html.ValidationMessageFor(x => x.ShortName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2"></div>
+                <div class="col-10">
+                    <button type="submit" class="btn btn-success">Svae <i class="fa fa-download"></i></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="toast bg-dark text-white" style="position:absolute;top:75px; right:10px;"  id="tsuccess" role="alert" data-autohide="true" data-delay="3000" aria-live="assertive" aria-atomic="true">
+    
+    <div class="toast-body">
+        Data inserted.
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onSuccess(r) {
+            console.log(r);
+            if (r.success) {
+                $('#tsuccess').toast('show');
+                $("#f").trigger("reset");
+            }
+        }
+        function onComplete(r) {
+
+        }
+    </script>
+
+}

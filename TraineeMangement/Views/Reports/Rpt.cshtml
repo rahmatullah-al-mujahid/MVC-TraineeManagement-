@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TraineeMangement.ViewModels.RptVm>
+
+@{
+    ViewBag.Title = "Rpt";
+}
+
+<h2>Traine per batch</h2>
+@using (Html.BeginForm("Export", "Reports", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="hidden" name="reportName" value="trainee" />
+    <button id="btnSubmit" title="Print report" type="submit" class="btn btn-floating btn halfway-fab right"><i class="material-icons">print</i></button>
+}
+
+<div id="grid">
+    <h3>Traine per batch</h3>
+    <table class="table table-bordered" border="1" cellspacing="0" style="width:100%">
+        <tr>
+            <th>
+                Trainee Name
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Address
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td colspan="3">
+                    @item.Batch
+                </td>
+            </tr>
+            foreach (var t in item.Trainees)
+            {
+                <tr>
+                    <td>@t.TraineeName</td>
+                    <td>@t.Phone</td>
+                    <td>@t.PresentAddress</td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#grid").html());
+            });
+        });
+    </script>
+}
